@@ -11,14 +11,14 @@ pipeline{
 		stage ('Testing Stage'){
 			steps{
 				withMaven(maven : 'maven'){
-					bat 'mvn clean compile'
+					bat 'mvn test'
 					}
 				}
 			}
-		stage ('Deployment Stage'){
+		stage('Install stage'){
 			steps{
-				withMaven(maven : 'maven'){
-					bat 'mvn deploy'
+			withMaven(maven : 'maven'){
+			bat 'mvn install'
 					}
 				}
 			}
