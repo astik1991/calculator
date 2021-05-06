@@ -14,6 +14,6 @@ public class CalculatorRestImpl {
 
 	@GetMapping("/hello")
 	public String hello() {
-		return "Hello User, have a nice day.";
+		return "Welcome Tomcat is started ....";
 	}
 }
