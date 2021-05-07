@@ -25,7 +25,7 @@ pipeline {
             
         stage ('Deploy') {
             steps{
-            deploy adapters: [tomcat8(credentialsId: '0ec60cd3-c147-467b-bc23-ceabd7954e28', path: '', url: 'http://localhost:9090/')], contextPath: 'calculator-web-services', onFailure: false, war: '**/*.war'
+            deploy adapters: [tomcat8(credentialsId: '0ec60cd3-c147-467b-bc23-ceabd7954e28', path: '', url: 'http://localhost:9090/')], onFailure: false, war: '**/*.war'
              echo "Deploy successful";
             }
         }
