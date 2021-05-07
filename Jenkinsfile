@@ -1,27 +1,38 @@
-node{
-
-   def tomcatWeb = 'E:\\SW\\apache-tomcat-8.5.65\\apache-tomcat-8.5.65\\webapps'
-  // def tomcatBin = 'D:\\Auto_deployment\\apache-tomcat-9.0.30\\apache-tomcat-9.0.30\\bin'
-   def tomcatStatus = ''
-   
-   stage('Compile-Package-create-war-file'){
-      steps{
-                  bat label: '', script: 'mvn clean package'
+pipeline {  
+    agent any  
+    stages {  
+            stage ('Compile') {  
+                  steps{
+                    bat label: '', script: 'mvn compile'
+                    echo "test successful";
+                    
                 } 
-      }
-/*   stage ('Stop Tomcat Server') {
-               bat ''' @ECHO OFF
-               wmic process list brief | find /i "tomcat" > NUL
-               IF ERRORLEVEL 1 (
-                    echo  Stopped
-               ) ELSE (
-               echo running
-                  "${tomcatBin}\\shutdown.bat"
-                  sleep(time:10,unit:"SECONDS") 
-               )
-'''
-   }*/
-   stage('Deploy to Tomcat'){
-     bat "copy target\\calculator-web-services.war \"${tomcatWeb}\\calculator-web-services.war\""
-   }
+            }
+            stage ('Build') {  
+                  steps{
+                    bat label: '', script: 'mvn clean'
+                    bat label: '', script: 'mvn package'
+                    echo "build successful";
+                    
+                } 
+            }
+             stage ('Test') {  
+                  steps{
+                    bat label: '', script: 'mvn test'
+                    echo "test successful";
+                } 
+            }
+            
+        stage ('Deploy') {
+            steps{
+            deploy adapters: [tomcat8(credentialsId: 'a7971616-2bc3-4f38-86c6-e3cb0164e6ec', path: '', url: 'http://localhost:9090')], contextPath: null, war: '**/*.war'
+             echo "Deploy successful";
+            }
+        }
+        stage ('Monitor') { 
+           steps{ 
+             echo "Now you can monitor!";
+           }
+        }
+    }
 }
