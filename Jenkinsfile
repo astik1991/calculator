@@ -29,6 +29,11 @@ pipeline {
              echo "Deploy successful";
             }
         }
+        post {
+        always {
+            junit allowEmptyResults: true, testResults:  'target/surefire-reports/**/*.xml'
+        }
+    }
         stage ('Monitor') { 
            steps{ 
              echo "Now you can monitor!";
