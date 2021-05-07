@@ -10,4 +10,8 @@ class CalculatorApplicationTests {
 	void contextLoads() {
 	}
 
+	
+	@Test
+	public void addTest() {
+	}
 }
