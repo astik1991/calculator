@@ -1,6 +1,6 @@
 node{
 
-   def tomcatWeb = 'E:\SW\apache-tomcat-8.5.65\apache-tomcat-8.5.65\webapps'
+   def tomcatWeb = 'E:\\SW\\apache-tomcat-8.5.65\\apache-tomcat-8.5.65\\webapps'
   // def tomcatBin = 'D:\\Auto_deployment\\apache-tomcat-9.0.30\\apache-tomcat-9.0.30\\bin'
    def tomcatStatus = ''
    
